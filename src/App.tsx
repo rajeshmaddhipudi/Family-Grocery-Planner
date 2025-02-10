@@ -7,8 +7,6 @@ import { CartItem, GroceryItem } from './types';
 
 function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [showPhoneInput, setShowPhoneInput] = useState(false);
 
   const handleAddToCart = (item: GroceryItem) => {
     setCartItems((prev) => {
@@ -34,17 +32,7 @@ function App() {
     );
   };
 
-  const handleSendToWhatsApp = () => {
-    if (!showPhoneInput) {
-      setShowPhoneInput(true);
-      return;
-    }
-
-    if (!phoneNumber.trim()) {
-      alert('Please enter a phone number');
-      return;
-    }
-
+  const handleShare = () => {
     // Format the message with categories
     const itemsByCategory = cartItems.reduce((acc, item) => {
       if (!acc[item.category]) {
@@ -67,20 +55,15 @@ function App() {
     
     const message = messageLines.join('\n');
 
-    // Clean the phone number
-    const cleanNumber = phoneNumber.replace(/[^0-9+]/g, '');
-
-    // Create the WhatsApp URL
+    // Create the WhatsApp share URL
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=${cleanNumber}&text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
 
     // Open WhatsApp
     window.open(whatsappUrl, '_blank');
 
-    // Reset the form
+    // Reset the cart
     setCartItems([]);
-    setPhoneNumber('');
-    setShowPhoneInput(false);
   };
 
   return (
@@ -91,7 +74,7 @@ function App() {
             <div className="flex items-center gap-2">
               <ShoppingBasket className="w-6 h-6 text-green-600" />
               <h1 className="text-xl font-semibold text-gray-900">
-                Grocery Planner
+                Grocery List
               </h1>
             </div>
             <div className="text-sm text-gray-500">
@@ -110,10 +93,7 @@ function App() {
             <Cart
               items={cartItems}
               onUpdateQuantity={handleUpdateQuantity}
-              onSendToWhatsApp={handleSendToWhatsApp}
-              showPhoneInput={showPhoneInput}
-              phoneNumber={phoneNumber}
-              onPhoneNumberChange={(e) => setPhoneNumber(e.target.value)}
+              onShare={handleShare}
             />
           </div>
         </div>

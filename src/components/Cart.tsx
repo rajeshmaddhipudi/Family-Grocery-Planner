@@ -1,23 +1,17 @@
 import React from 'react';
-import { Minus, Plus, Send } from 'lucide-react';
+import { Minus, Plus, Share2 } from 'lucide-react';
 import { CartItem } from '../types';
 
 interface Props {
   items: CartItem[];
   onUpdateQuantity: (id: string, change: number) => void;
-  onSendToWhatsApp: () => void;
-  showPhoneInput: boolean;
-  phoneNumber: string;
-  onPhoneNumberChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onShare: () => void;
 }
 
 export function Cart({
   items,
   onUpdateQuantity,
-  onSendToWhatsApp,
-  showPhoneInput,
-  phoneNumber,
-  onPhoneNumberChange,
+  onShare,
 }: Props) {
   const total = items.length;
 
@@ -76,28 +70,12 @@ export function Cart({
         ))}
       </div>
 
-      {showPhoneInput && (
-        <div className="mt-6">
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-            Enter WhatsApp Number
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            placeholder="e.g., +1234567890"
-            value={phoneNumber}
-            onChange={onPhoneNumberChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
-          />
-        </div>
-      )}
-
       <button
-        onClick={onSendToWhatsApp}
+        onClick={onShare}
         className="mt-6 w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 flex items-center justify-center gap-2"
       >
-        <Send className="w-4 h-4" />
-        {showPhoneInput ? 'Send to WhatsApp' : 'Continue to WhatsApp'}
+        <Share2 className="w-4 h-4" />
+        Share via WhatsApp
       </button>
     </div>
   );

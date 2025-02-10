@@ -28,4 +28,9 @@ export const groceryItems: GroceryItem[] = [
   { id: 'k3', name: 'Baby Food', category: 'Kids', unit: 'pcs' },
   { id: 'k4', name: 'Baby Powder', category: 'Kids', unit: 'pcs' },
   { id: 'k5', name: 'Baby Lotion', category: 'Kids', unit: 'pcs' },
+
+  //Indian Store
+
+  { id: 'I1', name: 'Rice', category: 'Indian Store', unit: 'kg' },
+  { id: 'I2', name: 'Dal', category: 'Indian Store', unit: 'kg' },
 ];
