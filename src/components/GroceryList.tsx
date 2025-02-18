@@ -9,7 +9,7 @@ interface Props {
 
 export function GroceryList({ items, onAddToCart }: Props) {
   const [selectedCategory, setSelectedCategory] = useState<GroceryItem['category']>('Vegetables');
-  const categories: GroceryItem['category'][] = ['Vegetables', 'Dairy', 'Cosmetics', 'Kids', 'Indian Store'];
+  const categories: GroceryItem['category'][] = ['Vegetables', 'Fruits', 'Dairy/Bakery', 'Kids', 'Indian Store','Cosmetics'];
 
   const filteredItems = items.filter(item => item.category === selectedCategory);
 
